@@ -1,0 +1,8 @@
+---
+
+- name: Add wordpress config
+  template: src=wp-config.php.j2 dest=/app/public/wp-config.php
+  #with_items: wordpress
+
+- name: fix Ldap config
+  lineinfile: dest=/etc/openldap/ldap.conf state=present line="tls_reqcert never"
