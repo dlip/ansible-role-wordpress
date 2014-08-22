@@ -1,19 +1,8 @@
 ---
 
 - name: Install wordpress php dependencies
-  yum: name={{item}} state=present
+  yum: name={{item}} state=present enablerepo=remi
   when: ansible_os_family == "RedHat"
   with_items:
     - php-mysql
     - php-ldap
-    #- php-pdo
-    #- php-pgsql
-    #- php-pecl-mongo
-    #- php-sqlite
-    #- php-pecl-memcache
-    #- php-pecl-memcached
-    #- php-gd
-    #- php-mbstring
-    #- php-mcrypt
-    #- php-xml
-
