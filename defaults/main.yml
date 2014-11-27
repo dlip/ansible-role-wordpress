@@ -4,6 +4,8 @@ wordpress:
   db_user: 'user'
   db_password: 'password'
   db_host: 'localhost'
+  db_service_port: 9811
   debug: 'false'
 
 wordpress_root: /app/public
+wordpress_url: 'http://localhost:8088'

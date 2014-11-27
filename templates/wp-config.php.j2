@@ -25,11 +25,7 @@ define('DB_USER', '{{ wordpress.db_user }}');
 define('DB_PASSWORD', '{{ wordpress.db_password }}');
 
 /** MySQL hostname */
-{% if lookup('env','MYSQL_1_PORT_3306_TCP_ADDR') %}
-define('DB_HOST', '{{ lookup('env','MYSQL_1_PORT_3306_TCP_ADDR') }}');
-{% else %}
 define('DB_HOST', '{{ wordpress.db_host }}');
-{% endif %}
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

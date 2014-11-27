@@ -8,3 +8,29 @@
 
 - name: fix Ldap config
   lineinfile: dest=/etc/openldap/ldap.conf state=present line="tls_reqcert never"
+
+- name: Download wp-cli
+  get_url: url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar dest=/usr/bin/wp
+
+- name: Set composer permissions
+  file: path=/usr/bin/wp mode=0755
+
+- name: Wait for db server
+  shell: "nc {{wordpress.db_host}} {{wordpress.db_service_port}}"
+  register: result
+  until: result.stdout.find("service up") != -1
+  retries: 12
+  delay: 5
+  when: wordpress.db_service_port is defined
+
+- name: Update siteurl
+  shell: "wp option update siteurl {{wordpress_url}}"
+  args:
+    chdir: "{{wordpress_root}}"
+  when: wordpress.db_service_port is defined
+
+- name: Update home
+  shell: "wp option update home {{wordpress_url}}"
+  args:
+    chdir: "{{wordpress_root}}"
+  when: wordpress.db_service_port is defined
