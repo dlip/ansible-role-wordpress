@@ -1,8 +1,10 @@
 ---
 
 - name: Add wordpress config
-  template: src=wp-config.php.j2 dest=/app/public/wp-config.php
-  #with_items: wordpress
+  template: src=wp-config.php.j2 dest="{{wordpress_root}}/wp-config.php"
+
+- name: Fix file permissions
+  file: path="{{wordpress_root}}/wp-content" recurse=yes mode=777
 
 - name: fix Ldap config
   lineinfile: dest=/etc/openldap/ldap.conf state=present line="tls_reqcert never"

@@ -4,3 +4,6 @@ wordpress:
   db_user: 'user'
   db_password: 'password'
   db_host: 'localhost'
+  debug: 'false'
+
+wordpress_root: /app/public
